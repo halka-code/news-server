@@ -1,7 +1,9 @@
-import express from 'express'
+const express = require('express') ; 
+const news = require('./data/news.json') ; 
+const error = require('./data/error.json')
 
-import news from './data/news.json' assert { type: 'json' };
-import error from './data/error.json' assert{ type: 'json' }; 
+// import news from './data/news.json' assert { type: 'json' };
+// import error from './data/error.json' assert{ type: 'json' }; 
 
 const app = express();
 
