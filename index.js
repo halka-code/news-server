@@ -1,1 +1,39 @@
 import express from 'express'
+
+import news from './data/news.json' assert { type: 'json' };
+import error from './data/error.json' assert{ type: 'json' }; 
+
+const app = express();
+
+const port = 5000;
+
+
+app.get('/', (req, res) => {
+    res.send(news)
+});
+app.get('/news/:id', (req, res) => {
+    // res.send(df)
+    const id = req.params.id
+    const specificNews = news.find(item => item._id == id)
+    if (specificNews) {
+        res.send(specificNews)
+    }
+    else{
+        res.send(error) ;
+    }
+})
+
+app.get('/category/:id' , (req , res )=>{
+    let id = req.params.id ;
+    const  filteredNews = news.filter(item=> item.category_id == id) ; 
+    if(filteredNews.length > 0){
+        res.send(filteredNews) ;
+    }
+    else{
+        res.send(error)
+    }
+})
+
+app.listen(port, () => {
+    console.log(`App is running on ${port}`)
+})
